@@ -54,5 +54,8 @@ public class RouterNavigation {
         }
     }
 
-    private class HomeView extends Component {}
+    @Route(value = "")
+    public class HomeView extends Component {
+
+    }
 }

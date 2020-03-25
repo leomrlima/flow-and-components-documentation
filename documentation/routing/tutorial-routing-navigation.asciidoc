@@ -1,6 +1,6 @@
 ---
 title: Navigating Between Routes
-order: 8
+order: 9
 layout: page
 ---
 
@@ -12,15 +12,45 @@ You can use the `RouterLink` component to create links pointing to route targets
 
 Navigation with `RouterLink` fetches the content of the new component without reloading the page. The page is updated in place.
 
-*Example*: Using `RouterLink` for navigation targets, with and without URL parameters.
+*Example*: Using `RouterLink` for a simple navigation targets.
 [source,java]
 ----
 void routerLink() {
     Div menu = new Div();
     menu.add(new RouterLink("Home", HomeView.class));
+}
+
+@Route(value = "")
+public class HomeView extends Component {
+}
+----
+
+*Example*: Using `RouterLink` for navigation targets, with typed URL parameters, where the navigation target class implements `HasUrlParameter`.
+[source,java]
+----
+void routerLink() {
+    Div menu = new Div();
     menu.add(new RouterLink("Greeting",
             GreetingComponent.class, "default"));
 }
+
+@Route(value = "greet")
+public class GreetingComponent extends Div
+        implements HasUrlParameter<String> {
+
+    @Override
+    public void setParameter(BeforeEvent event,
+            String parameter) {
+        setText(String.format("Hello, %s!", parameter));
+    }
+}
+----
+
+TBC
+
+*Example*:
+[source,java]
+----
 ----
 
 *Example*: GreetingComponent with URL parameter.
